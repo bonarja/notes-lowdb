@@ -48,7 +48,7 @@ app.get("/notes/:id", (req, res) => {
 });
 
 app.get("/notes", async (req, res) => {
-  res.json(db.data.notes);
+  res.json(db.data.notes.map((x) => ({ id: x.id, title: x.title, date: x.date })));
 });
 
 app.listen(port, () => {
