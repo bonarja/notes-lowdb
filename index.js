@@ -1,6 +1,7 @@
 import express from "express";
 import { JSONFileSyncPreset } from "lowdb/node";
 import { v4 as uuid } from "uuid";
+import cors from "cors";
 // for password has ----
 import bcrypt from "bcrypt";
 const saltRounds = 10;
@@ -10,10 +11,11 @@ const app = express();
 const port = 3000;
 
 app.use(express.json());
+app.use(cors());
 
 const defaultData = { notes: [], users: [] };
 const db = JSONFileSyncPreset("./db.json", defaultData);
-console.log(db.update);
+
 app.post("/notes", async (req, res) => {
   const { title, content, id } = req.body;
 
